@@ -66,7 +66,7 @@ export const verifyEmail = async (req, res) => {
 
 		user.isVerified = true;
 		user.verificationToken = undefined;
-		user.verificationTokenExpiresAt = undefined;
+		user.verificationExpiresAt = undefined;
 		await user.save();
 
 		await sendWelcomeEmail(user.email, user.name);
@@ -202,3 +202,4 @@ export const checkAuth = async (req, res) => {
 		res.status(400).json({ success: false, message: error.message });
 	}
 };    
+

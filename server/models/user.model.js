@@ -1,4 +1,6 @@
-import mongoose from "mongoose"
+import mongoose from "mongoose";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const userSchema = new mongoose.Schema({
     name:{
@@ -17,7 +19,7 @@ const userSchema = new mongoose.Schema({
     aboutme:{
 
     },
-    isVerififed:{
+    isVerified:{
         type: Boolean,
         default: false,
     },

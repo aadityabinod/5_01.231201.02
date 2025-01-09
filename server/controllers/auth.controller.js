@@ -17,7 +17,7 @@ export const register = async (req, res) =>{
     }
 
     const hashedPassword = await User.hashPassword(password);
-    const token = await User.generateAuthToken();
+    const token = await User.generateAuthToken;
     const verificationToken = Math.floor(100000 + Math.random() * 900000).toString();
 
     const user = new User({

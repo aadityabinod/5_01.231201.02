@@ -1,7 +1,16 @@
+import { Route, Routes } from "react-router-dom";
+import RegisterPage from "./pages/RegisterPage";
+import EmailVerification from "./pages/EmailVerification";
+import Login from "./pages/Login";
+
 export default function App() {
   return (
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+    <Routes>
+      <Route path="/register" element={<RegisterPage/>}/>
+      <Route path="/verifyEmail" element={<EmailVerification/>}/>
+      <Route path="/login" element={<Login/>}/>
+
+    </Routes>
+    
   )
 }

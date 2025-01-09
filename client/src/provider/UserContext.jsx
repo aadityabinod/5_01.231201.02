@@ -53,13 +53,25 @@ export const UserContextProvider = ({ children }) => {
         try {
             const res = await axios.post(`${serverUrl}/auth/verifyEmail`, { code });
             console.log("User verified successfully", res.data);
-            setUser(res.data.user);
-            navigate("/login");
+    
+            if (!res.data.success) {
+                throw new Error(res.data.message || "Invalid verification code");
+            }
+    
+            setUser(res.data.user); 
+            navigate("/login"); 
+            toast.success("Email verified successfully");
         } catch (error) {
             console.log("Error verifying user", error.response?.data.message);
             toast.error(error.response?.data.message || "Failed to verify email");
-        }
+            throw error;         }
     };
+
+    const handlerUserInput = (htmlfor) => (e) => {
+        const { value } = e.target;
+        setUserState((prev) => ({ ...prev, [htmlfor]: value }));
+    };
+
 
     const loginUser = async (e) => {
         e.preventDefault();
@@ -126,6 +138,7 @@ export const UserContextProvider = ({ children }) => {
                 user,
                 setUser,
                 userState,
+                handlerUserInput,
                 setUserState,
                 registerUser,
                 verifyEmail,
